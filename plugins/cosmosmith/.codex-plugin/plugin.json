@@ -1,0 +1,36 @@
+{
+  "name": "cosmosmith",
+  "version": "0.1.0",
+  "description": "A multi-agent skill system for turning rough ideas into researched specs, task flows, implementation, verification, and release.",
+  "author": {
+    "name": "devnomad-byte",
+    "url": "https://github.com/devnomad-byte"
+  },
+  "homepage": "https://github.com/devnomad-byte/cosmosmith",
+  "repository": "https://github.com/devnomad-byte/cosmosmith",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agents",
+    "specs",
+    "devops",
+    "product"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Cosmosmith",
+    "shortDescription": "Turn rough ideas into specs, tasks, implementation, verification, and release.",
+    "longDescription": "Cosmosmith packages short connected skills, templates, and validation loops for multi-agent product and software creation.",
+    "developerName": "devnomad-byte",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Turn this rough idea into a Cosmosmith proposal.",
+      "Create a task ledger from this product direction.",
+      "Review this project for Cosmosmith rule drift."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

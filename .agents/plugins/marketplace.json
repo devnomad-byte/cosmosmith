@@ -1,0 +1,20 @@
+{
+  "name": "cosmosmith",
+  "interface": {
+    "displayName": "Cosmosmith"
+  },
+  "plugins": [
+    {
+      "name": "cosmosmith",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cosmosmith"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Project Rules"
+  short_description: "Generate AGENTS.md and editor-specific rule adapters."
+  default_prompt: "Use $cosmosmith-project-rules to install Cosmosmith project rules into this repository."

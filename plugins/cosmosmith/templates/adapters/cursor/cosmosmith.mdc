@@ -1,0 +1,13 @@
+---
+description: Cosmosmith project rules adapter
+alwaysApply: true
+---
+
+Follow `AGENTS.md` as the canonical project constitution.
+
+Use Cosmosmith's Prompt, Context, Harness, Loop model for substantial work.
+
+Update `task.md` when claiming, blocking, reviewing, verifying, or completing tasks.
+
+Do not mark work done without verification evidence.
+

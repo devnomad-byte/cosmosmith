@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Spec Governor"
+  short_description: "Convert briefs into proposals, designs, and task ledgers."
+  default_prompt: "Use $cosmosmith-spec-governor to create a proposal, design, and task ledger from this brief."

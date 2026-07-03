@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Governance Review"
+  short_description: "Review Cosmosmith artifacts for coherence and completion."
+  default_prompt: "Use $cosmosmith-governance-review to review these artifacts for gaps and rule drift."

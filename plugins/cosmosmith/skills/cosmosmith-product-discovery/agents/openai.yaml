@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Product Discovery"
+  short_description: "Turn rough ideas into concise idea briefs."
+  default_prompt: "Use $cosmosmith-product-discovery to turn this rough idea into a Cosmosmith idea brief."
