@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Frontend Engineer"
+  short_description: "Implement frontend task slices with verification evidence."
+  default_prompt: "Use $cosmosmith-frontend-engineer to claim and implement the next frontend task."

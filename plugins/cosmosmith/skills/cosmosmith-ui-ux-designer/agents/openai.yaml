@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith UI/UX Designer"
+  short_description: "Design flows, screens, states, accessibility, and visual direction."
+  default_prompt: "Use $cosmosmith-ui-ux-designer to design the user experience for this proposal."

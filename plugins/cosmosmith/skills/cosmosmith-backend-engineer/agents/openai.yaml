@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Backend Engineer"
+  short_description: "Implement backend task slices with contracts and tests."
+  default_prompt: "Use $cosmosmith-backend-engineer to claim and implement the next backend task."

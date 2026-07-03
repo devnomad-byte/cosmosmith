@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Architect"
+  short_description: "Design boundaries, data flow, reliability, and integration strategy."
+  default_prompt: "Use $cosmosmith-architect to design the technical architecture for this proposal."

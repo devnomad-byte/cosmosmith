@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith QA Verifier"
+  short_description: "Verify tasks against acceptance criteria and record evidence."
+  default_prompt: "Use $cosmosmith-qa-verifier to verify the tasks ready for QA."

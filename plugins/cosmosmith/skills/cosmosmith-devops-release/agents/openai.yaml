@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith DevOps Release"
+  short_description: "Prepare build, CI, deployment, monitoring, and rollback."
+  default_prompt: "Use $cosmosmith-devops-release to prepare release readiness for this project."

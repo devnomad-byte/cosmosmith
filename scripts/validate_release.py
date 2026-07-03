@@ -23,11 +23,19 @@ REQUIRED_FILES = [
     PLUGIN / "templates" / "artifacts" / "task-ledger.md",
     PLUGIN / "templates" / "artifacts" / "qa-report.md",
     PLUGIN / "templates" / "artifacts" / "release-readiness.md",
+    PLUGIN / "references" / "standards.md",
 ]
 
 SKILLS = [
     "cosmosmith-product-discovery",
+    "cosmosmith-market-research",
     "cosmosmith-spec-governor",
+    "cosmosmith-architect",
+    "cosmosmith-ui-ux-designer",
+    "cosmosmith-frontend-engineer",
+    "cosmosmith-backend-engineer",
+    "cosmosmith-qa-verifier",
+    "cosmosmith-devops-release",
     "cosmosmith-governance-review",
     "cosmosmith-project-rules",
 ]
@@ -106,4 +114,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

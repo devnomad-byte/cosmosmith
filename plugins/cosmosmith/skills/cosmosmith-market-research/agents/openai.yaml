@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cosmosmith Market Research"
+  short_description: "Research competitors, analogues, standards, and external evidence."
+  default_prompt: "Use $cosmosmith-market-research to research competitors and implications for this idea."
