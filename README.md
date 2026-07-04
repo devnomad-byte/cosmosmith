@@ -214,10 +214,6 @@ scripts/validate_release.py        # release validation harness
 - More editor adapters as agent rule conventions stabilize.
 - Optional validators for task ledger consistency and artifact freshness.
 
-## Launch Plan
-
-Planning a public release or community post? See [docs/launch-plan.md](docs/launch-plan.md) for the launch checklist, platform URLs, post drafts, and week-one metrics.
-
 ## License
 
 MIT
