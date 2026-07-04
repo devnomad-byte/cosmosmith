@@ -115,8 +115,8 @@ def main() -> int:
     if package.get("name") != "cosmosmith":
         fail("package name must be cosmosmith")
     bin_field = package.get("bin")
-    if not isinstance(bin_field, dict) or bin_field.get("cosmosmith") != "./bin/cosmosmith.mjs":
-        fail("package bin must expose ./bin/cosmosmith.mjs")
+    if not isinstance(bin_field, dict) or bin_field.get("cosmosmith") != "bin/cosmosmith.mjs":
+        fail("package bin must expose bin/cosmosmith.mjs")
 
     check_text(ROOT / "README.md", "npx cosmosmith init")
     check_text(ROOT / "README.zh-CN.md", "npx cosmosmith init")

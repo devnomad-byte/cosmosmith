@@ -4,7 +4,7 @@
   "description": "A universal initializer and Codex plugin for multi-agent product, spec, implementation, QA, and release workflows.",
   "type": "module",
   "bin": {
-    "cosmosmith": "./bin/cosmosmith.mjs"
+    "cosmosmith": "bin/cosmosmith.mjs"
   },
   "files": [
     "bin/",
