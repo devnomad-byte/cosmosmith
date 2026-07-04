@@ -215,6 +215,10 @@ scripts/validate_release.py        # 发布验证 harness
 - 随着各编辑器 Agent 规则约定稳定，增加更多适配。
 - 增加可选的 task ledger 一致性校验和文档新鲜度校验。
 
+## 曝光计划
+
+准备公开发布或去社区发帖时，可以看 [docs/launch-plan.md](docs/launch-plan.md)。里面写了发布检查清单、平台 URL、发帖草稿和第一周指标。
+
 ## 许可证
 
 MIT
