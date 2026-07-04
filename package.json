@@ -1,6 +1,6 @@
 {
   "name": "cosmosmith",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A universal initializer and Codex plugin for multi-agent product, spec, implementation, QA, and release workflows.",
   "type": "module",
   "bin": {
