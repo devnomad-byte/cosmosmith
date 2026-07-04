@@ -121,6 +121,10 @@ def main() -> int:
     check_text(ROOT / "README.md", "npx cosmosmith init")
     check_text(ROOT / "README.zh-CN.md", "npx cosmosmith init")
 
+    project_rules = PLUGIN / "skills" / "cosmosmith-project-rules" / "SKILL.md"
+    for needle in ["OpenCode", "Trae", ".opencode/AGENTS.md", ".trae/rules/cosmosmith.md"]:
+        check_text(project_rules, needle)
+
     for skill in SKILLS:
         check_skill(skill)
 
