@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -11,7 +13,10 @@ PLUGIN = ROOT / "plugins" / "cosmosmith"
 
 REQUIRED_FILES = [
     ROOT / "README.md",
+    ROOT / "README.zh-CN.md",
     ROOT / "LICENSE",
+    ROOT / "package.json",
+    ROOT / "bin" / "cosmosmith.mjs",
     ROOT / ".agents" / "plugins" / "marketplace.json",
     PLUGIN / ".codex-plugin" / "plugin.json",
     PLUGIN / "templates" / "generated-project" / "AGENTS.md",
@@ -63,6 +68,13 @@ def check_json(path: Path) -> dict:
     return data
 
 
+def check_text(path: Path, needle: str) -> None:
+    text = path.read_text(encoding="utf-8")
+    if needle not in text:
+        fail(f"missing `{needle}` in {path.relative_to(ROOT)}")
+    print(f"PASS text: {path.relative_to(ROOT)} contains {needle}")
+
+
 def check_skill(skill: str) -> None:
     path = PLUGIN / "skills" / skill / "SKILL.md"
     check_file(path)
@@ -99,6 +111,16 @@ def main() -> int:
     if manifest.get("skills") != "./skills/":
         fail("plugin skills path must be ./skills/")
 
+    package = check_json(ROOT / "package.json")
+    if package.get("name") != "cosmosmith":
+        fail("package name must be cosmosmith")
+    bin_field = package.get("bin")
+    if not isinstance(bin_field, dict) or bin_field.get("cosmosmith") != "./bin/cosmosmith.mjs":
+        fail("package bin must expose ./bin/cosmosmith.mjs")
+
+    check_text(ROOT / "README.md", "npx cosmosmith init")
+    check_text(ROOT / "README.zh-CN.md", "npx cosmosmith init")
+
     for skill in SKILLS:
         check_skill(skill)
 
@@ -107,6 +129,42 @@ def main() -> int:
             text = path.read_text(encoding="utf-8")
             if "TODO" in text or "[TODO" in text:
                 fail(f"placeholder remains in {path.relative_to(ROOT)}")
+
+    smoke_dir = ROOT / ".tmp" / "validate-init"
+    if smoke_dir.exists():
+        shutil.rmtree(smoke_dir)
+    result = subprocess.run(
+        [
+            "node",
+            str(ROOT / "bin" / "cosmosmith.mjs"),
+            "init",
+            "--all",
+            "--dir",
+            str(smoke_dir),
+        ],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    if result.returncode != 0:
+        fail(f"cosmosmith init smoke test failed:\n{result.stdout}")
+    for relative in [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "task.md",
+        "proposal.md",
+        "design.md",
+        "docs/cosmosmith/idea-brief.md",
+        "docs/cosmosmith/research-brief.md",
+        ".cursor/rules/cosmosmith.mdc",
+        ".github/copilot-instructions.md",
+        ".opencode/AGENTS.md",
+        ".trae/rules/cosmosmith.md",
+    ]:
+        if not (smoke_dir / relative).is_file():
+            fail(f"init smoke test missing {relative}")
+    print("PASS smoke: cosmosmith init --all generated expected files")
 
     print("Cosmosmith release validation passed.")
     return 0

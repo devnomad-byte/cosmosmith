@@ -1,12 +1,74 @@
 # Cosmosmith
 
-Cosmosmith（造界匠）是一套多 Agent 技能系统，用来把一个粗略想法变成经过调研的规格、任务板、实现切片、验证证据和发布检查。
+Cosmosmith（造界匠）是一套通用初始化器和 Codex 插件，用来把粗略想法变成经过调研的规格、任务板、实现切片、验证证据和发布准备。
 
-它既可以作为 Codex 原生插件安装，也可以作为其他 AI 编程工具的规则/模板兼容包使用。
+它面向 Codex、Claude Code、Cursor、GitHub Copilot、OpenCode、Trae 以及类似的 AI 编程工具。
 
 English documentation: [README.md](README.md)
 
-## 提供什么
+## 快速开始
+
+在任意项目里运行：
+
+```bash
+npx cosmosmith init
+```
+
+它会生成：
+
+- `AGENTS.md`
+- `task.md`
+- `proposal.md`
+- `design.md`
+- `docs/cosmosmith/idea-brief.md`
+- `docs/cosmosmith/research-brief.md`
+
+一次生成所有工具适配文件：
+
+```bash
+npx cosmosmith init --all
+```
+
+或者只选择部分适配：
+
+```bash
+npx cosmosmith init --claude --cursor --copilot
+```
+
+常用选项：
+
+```bash
+npx cosmosmith init --dir ./my-project
+npx cosmosmith init --all --force
+npx cosmosmith init --all --dry-run
+```
+
+## 编辑器 / Agent 支持
+
+| 工具 | 命令 |
+| --- | --- |
+| 通用 Agent | `npx cosmosmith init` |
+| Claude Code | `npx cosmosmith init --claude` |
+| Cursor | `npx cosmosmith init --cursor` |
+| GitHub Copilot | `npx cosmosmith init --copilot` |
+| OpenCode | `npx cosmosmith init --opencode` |
+| Trae | `npx cosmosmith init --trae` |
+| 全部适配 | `npx cosmosmith init --all` |
+
+Cosmosmith 把 `AGENTS.md` 作为项目的主规则文件。其他工具文件只是适配层。
+
+## Codex 插件安装
+
+Codex 用户也可以安装原生插件：
+
+```bash
+codex plugin marketplace add devnomad-byte/cosmosmith
+codex plugin add cosmosmith@cosmosmith
+```
+
+安装后开启一个新的 Codex 线程，让新 skills 被加载。
+
+## Skills
 
 - `cosmosmith-product-discovery`：把粗略想法澄清成 idea brief。
 - `cosmosmith-market-research`：调研竞品、同类产品、标准和外部证据。
@@ -18,94 +80,7 @@ English documentation: [README.md](README.md)
 - `cosmosmith-qa-verifier`：按验收标准验证任务并记录证据。
 - `cosmosmith-devops-release`：准备构建、CI、部署、监控和回滚。
 - `cosmosmith-governance-review`：检查规则漂移、缺失证据和任务完整性。
-- `cosmosmith-project-rules`：生成 `AGENTS.md`，以及可选的 `CLAUDE.md`、Cursor rules、Copilot instructions。
-
-## 安装/使用矩阵
-
-| 工具 | 支持方式 | 如何使用 Cosmosmith |
-| --- | --- | --- |
-| Codex | 原生插件 | 安装 marketplace 和 plugin。 |
-| Claude Code | 规则适配 | 复制或生成 `AGENTS.md` 与 `CLAUDE.md`；skills 作为工作流参考。 |
-| Cursor | 规则适配 | 复制或生成 `AGENTS.md` 与 `.cursor/rules/cosmosmith.mdc`。 |
-| GitHub Copilot | instructions 适配 | 复制或生成 `AGENTS.md` 与 `.github/copilot-instructions.md`。 |
-| OpenCode | 可移植 skills/rules | 复制 `AGENTS.md`，并按你的环境使用 `plugins/cosmosmith/skills/*`。 |
-| Trae | 项目规则适配 | 复制或生成 `AGENTS.md`，再按 Trae 项目规则格式适配。 |
-
-Codex 是原生插件目标。其他工具通过项目规则文件、模板和可移植 `SKILL.md` 工作流使用 Cosmosmith。
-
-## Codex 安装
-
-添加这个仓库作为 Codex plugin marketplace：
-
-```bash
-codex plugin marketplace add devnomad-byte/cosmosmith
-```
-
-安装插件：
-
-```bash
-codex plugin add cosmosmith@cosmosmith
-```
-
-安装后开启一个新的 Codex 线程，让新 skills 被加载。
-
-## Claude Code 使用
-
-Cosmosmith 把 `AGENTS.md` 作为跨 Agent 的项目宪法，把 `CLAUDE.md` 作为 Claude Code 的适配文件。
-
-如果已经在 Codex 中安装 Cosmosmith，可以在目标项目里说：
-
-```text
-Use $cosmosmith-project-rules to create AGENTS.md and CLAUDE.md for this repo.
-```
-
-手动方式：
-
-1. 复制 `plugins/cosmosmith/templates/generated-project/AGENTS.md` 到项目根目录。
-2. 复制 `plugins/cosmosmith/templates/generated-project/CLAUDE.md` 到项目根目录。
-3. 让 Claude Code 遵守 `CLAUDE.md`；它会指向 canonical 的 `AGENTS.md`。
-
-## Cursor 使用
-
-如果已经安装 Cosmosmith，可以在目标项目里说：
-
-```text
-Use $cosmosmith-project-rules to create AGENTS.md and Cursor rules for this repo.
-```
-
-手动方式：
-
-1. 复制 `plugins/cosmosmith/templates/generated-project/AGENTS.md` 为 `AGENTS.md`。
-2. 复制 `plugins/cosmosmith/templates/adapters/cursor/cosmosmith.mdc` 为 `.cursor/rules/cosmosmith.mdc`。
-
-Cursor rule 会保持很短，`AGENTS.md` 仍然是主规则。
-
-## GitHub Copilot 使用
-
-手动方式：
-
-1. 复制 `plugins/cosmosmith/templates/generated-project/AGENTS.md` 为 `AGENTS.md`。
-2. 复制 `plugins/cosmosmith/templates/adapters/copilot/copilot-instructions.md` 为 `.github/copilot-instructions.md`。
-
-Copilot instructions 应保持简短，并指向 `AGENTS.md`。
-
-## OpenCode 使用
-
-兼容 OpenCode 的环境可以使用项目规则和可移植 skill 文件夹：
-
-1. 复制 `plugins/cosmosmith/templates/generated-project/AGENTS.md` 到项目根目录。
-2. 如果你的 OpenCode 环境支持 skill folders，把 `plugins/cosmosmith/skills/` 复制到对应位置。
-3. 在提示词中使用 skill 名，例如 `cosmosmith-spec-governor`。
-
-如果你的环境不直接支持 portable skills，可以把 `SKILL.md` 当作工作流参考。
-
-## Trae 使用
-
-Trae 用户可以通过项目规则使用 Cosmosmith：
-
-1. 复制 `plugins/cosmosmith/templates/generated-project/AGENTS.md` 到项目。
-2. 如果 Trae 工作区使用不同的规则文件格式，把相关章节转换为 Trae 项目规则。
-3. 尽量保持 `AGENTS.md` 为 canonical source。
+- `cosmosmith-project-rules`：生成项目规则适配文件。
 
 ## 典型流程
 
@@ -118,23 +93,36 @@ Trae 用户可以通过项目规则使用 Cosmosmith：
 7. 用 `cosmosmith-devops-release` 做发布准备。
 8. 完成前用 `cosmosmith-governance-review` 做治理审查。
 
-示例：
+## `init` 会写入什么
+
+默认：
 
 ```text
-Use $cosmosmith-product-discovery to turn this idea into a brief: ...
+AGENTS.md
+task.md
+proposal.md
+design.md
+docs/cosmosmith/idea-brief.md
+docs/cosmosmith/research-brief.md
 ```
 
-```text
-Use $cosmosmith-spec-governor to create proposal.md, design.md, and task.md.
-```
+使用 `--all`：
 
 ```text
-Use $cosmosmith-project-rules to create AGENTS.md and CLAUDE.md for this repo.
+CLAUDE.md
+.cursor/rules/cosmosmith.mdc
+.github/copilot-instructions.md
+.opencode/AGENTS.md
+.trae/rules/cosmosmith.md
 ```
+
+默认不会覆盖已有文件。需要覆盖时使用 `--force`。
 
 ## 仓库结构
 
 ```text
+bin/cosmosmith.mjs
+package.json
 .agents/plugins/marketplace.json
 plugins/cosmosmith/
   .codex-plugin/plugin.json
@@ -143,14 +131,18 @@ plugins/cosmosmith/
 scripts/validate_release.py
 ```
 
-插件位于 `plugins/cosmosmith/`，所以这个仓库可以作为 Codex marketplace。
-
 ## 开发验证
 
 验证发布包：
 
 ```bash
-python scripts/validate_release.py
+npm run validate
+```
+
+冒烟测试初始化器：
+
+```bash
+npm run smoke:init
 ```
 
 验证 Codex plugin：
@@ -162,3 +154,4 @@ python path/to/plugin-creator/scripts/validate_plugin.py plugins/cosmosmith
 ## 许可证
 
 MIT
+

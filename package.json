@@ -1,0 +1,37 @@
+{
+  "name": "cosmosmith",
+  "version": "0.1.0",
+  "description": "A universal initializer and Codex plugin for multi-agent product, spec, implementation, QA, and release workflows.",
+  "type": "module",
+  "bin": {
+    "cosmosmith": "./bin/cosmosmith.mjs"
+  },
+  "files": [
+    "bin/",
+    "plugins/",
+    ".agents/",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "validate": "python scripts/validate_release.py",
+    "smoke:init": "node bin/cosmosmith.mjs init --all --dir .tmp/smoke --force"
+  },
+  "keywords": [
+    "agents",
+    "skills",
+    "codex",
+    "claude",
+    "cursor",
+    "devops",
+    "specs"
+  ],
+  "author": "devnomad-byte",
+  "license": "MIT",
+  "homepage": "https://github.com/devnomad-byte/cosmosmith",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devnomad-byte/cosmosmith.git"
+  }
+}
